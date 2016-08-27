@@ -14,5 +14,8 @@ angular.module('shortly.links', [])
     }
     
   });
+  $scope.signout = function() {
+    return Auth.signout();
+  };
 
 });

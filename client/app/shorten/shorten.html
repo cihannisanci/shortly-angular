@@ -4,8 +4,14 @@
       <li><a href='/#/links' class='index'>All Links</a></li>
       <li><a href='/#/shorten' class='create'>Shorten</a></li>
     </ul>
-    <a href='/logout' class='logout'>Logout</a>
+    <button ng-click="signout()" class='logout'>Logout</button>
   </div>
+   <form>
+      <input ng-model="checkMe" class='text' type='text' name='url'>
+      <input type='submit' ng-click="checkUrl(checkMe)" value='Shorten'>
+  </form>
+  <!-- <img class='spinner' src='../assets/spiffygif_46x46.gif'> -->
+  <div class='message'>{{ message }}</div>
 </div>
 
 
