@@ -8,7 +8,7 @@ angular.module('shortly.services', [])
         url: '/api/links'
       })
       .then(function(resp) {
-        return resp;
+        return resp.data;
       });
     },
     addOne: function(link) {
