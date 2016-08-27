@@ -12,7 +12,7 @@ angular.module('shortly.links', [])
     } else {
       $location.path('/signin');
     }
-    
+
   });
   $scope.signout = function() {
     return Auth.signout();
