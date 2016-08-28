@@ -6,17 +6,22 @@ angular.module('shortly', [
   'ngRoute',
   'ui.router'
 ])
-.config(function ($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/signin', {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+  $urlRouterProvider.otherwise('/links');
+
+  $stateProvider
+    .state('signin', {
+      url: '/signin',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController'
     })
-    .when('/links', {
+    .state('links', {
+      url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController',
       resolve: {
@@ -28,7 +33,8 @@ angular.module('shortly', [
         }
       }
     })
-    .when('/shorten', {
+    .state('shorten', {
+      url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
       resolve: {
@@ -36,10 +42,40 @@ angular.module('shortly', [
           return Auth.isAuth();
         }
       }
-    })
-    .otherwise({
-      redirectTo: '/links'
     });
+
+    // .when('/signin', {
+    //   templateUrl: 'app/auth/signin.html',
+    //   controller: 'AuthController'
+    // })
+    // .when('/signup', {
+    //   templateUrl: 'app/auth/signup.html',
+    //   controller: 'AuthController'
+    // })
+    // .when('/links', {
+    //   templateUrl: 'app/links/links.html',
+    //   controller: 'LinksController',
+    //   resolve: {
+    //     isAuth: function(Auth) {
+    //       return Auth.isAuth();
+    //     },
+    //     data: function(Links) {
+    //       return Links.getAll();
+    //     }
+    //   }
+    // })
+    // .when('/shorten', {
+    //   templateUrl: 'app/shorten/shorten.html',
+    //   controller: 'ShortenController',
+    //   resolve: {
+    //     isAuth: function(Auth) {
+    //       return Auth.isAuth();
+    //     }
+    //   }
+    // })
+    // .otherwise({
+    //   redirectTo: '/links'
+    // });
     
 
     // We add our $httpInterceptor into the array

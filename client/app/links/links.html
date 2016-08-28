@@ -1,8 +1,10 @@
 <div id='container'>
   <div class='navigation'>
     <ul>
-      <li><a href='/#/links' class='index'>All Links</a></li>
-      <li><a href='/#/shorten' class='create'>Shorten</a></li>
+      <li><a ui-sref="links" class="index">All Links</a></li>
+      <!-- <li><a href='/#/links' class='index'>All Links</a></li> -->
+      <li><a ui-sref="shorten" class="create">Shorten</a></li>
+      <!-- <li><a href='/#/shorten' class='create'>Shorten</a></li> -->
     </ul>
     <button ng-click="signout()" class='logout'>Logout</button>
   </div>
