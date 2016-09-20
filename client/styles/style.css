@@ -30,6 +30,9 @@ h1 {
 .navigation li {
   float: left;
 }
+.navigation .logout {
+  float: right;
+}
 
 .navigation li a {
   width: 100px;

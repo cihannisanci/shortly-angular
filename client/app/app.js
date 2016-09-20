@@ -3,19 +3,80 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ngRoute',
+  'ui.router'
 ])
-.config(function ($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/signin', {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+  $urlRouterProvider.otherwise('/links');
+
+  $stateProvider
+    .state('signin', {
+      url: '/signin',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController'
     })
-    // Your code here
+    .state('links', {
+      url: '/links',
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController',
+      resolve: {
+        isAuth: function(Auth) {
+          return Auth.isAuth();
+        },
+        data: function(Links) {
+          return Links.getAll();
+        }
+      }
+    })
+    .state('shorten', {
+      url: '/shorten',
+      templateUrl: 'app/shorten/shorten.html',
+      controller: 'ShortenController',
+      resolve: {
+        isAuth: function(Auth) {
+          return Auth.isAuth();
+        }
+      }
+    });
+
+    // .when('/signin', {
+    //   templateUrl: 'app/auth/signin.html',
+    //   controller: 'AuthController'
+    // })
+    // .when('/signup', {
+    //   templateUrl: 'app/auth/signup.html',
+    //   controller: 'AuthController'
+    // })
+    // .when('/links', {
+    //   templateUrl: 'app/links/links.html',
+    //   controller: 'LinksController',
+    //   resolve: {
+    //     isAuth: function(Auth) {
+    //       return Auth.isAuth();
+    //     },
+    //     data: function(Links) {
+    //       return Links.getAll();
+    //     }
+    //   }
+    // })
+    // .when('/shorten', {
+    //   templateUrl: 'app/shorten/shorten.html',
+    //   controller: 'ShortenController',
+    //   resolve: {
+    //     isAuth: function(Auth) {
+    //       return Auth.isAuth();
+    //     }
+    //   }
+    // })
+    // .otherwise({
+    //   redirectTo: '/links'
+    // });
+    
 
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls

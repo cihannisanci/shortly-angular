@@ -42,7 +42,7 @@ describe('LinksController', function () {
   });
 
   it('should populate the data property after the call to `Links.getAll()`', function () {
-    var mockLinks = [{}, {}, {}];
+    var mockLinks = [{'hello': 'hello'}, {}, {}];
     $httpBackend.expectGET('/api/links').respond(mockLinks);
 
     createController();
